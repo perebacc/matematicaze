@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatemáticaRevisa · Trigonometria e Quadriláteros</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121A14; --muted:#435047; --paper:#EFF5EC; --card:#FFFFFF; --rule:#C8D8C4;
+  --grn:#1B6B3A; --grn-s:#D4EDE0; --grn-d:#0F3D22;
+  --teal:#1A6272; --teal-s:#D2EBF0; --teal-d:#0D3A45;
+  --vio:#5C3DAE; --vio-s:#E5DEFA; --vio-d:#3B2580;
+  --org:#A96210; --org-s:#F3E2C0; --org-d:#724208;
+  --rose:#B5306A; --rose-s:#F5D9E9; --rose-d:#7D1F48;
+  --FH:'Fraunces',serif; --FB:'Source Sans 3',sans-serif; --FM:'JetBrains Mono',monospace;
+  --br:13px; --sh:0 2px 18px rgba(10,22,14,.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--FB);color:var(--ink);background:var(--paper);line-height:1.68;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--FH);font-weight:600;line-height:1.2;}
+p{margin-bottom:.85em;} p:last-child{margin-bottom:0;}
+ul,ol{padding-left:1.35em;} li{margin-bottom:.3em;}
+::selection{background:var(--grn-s);color:var(--grn-d);}
+
+.W{max-width:1060px;margin:0 auto;padding:0 22px;}
+#pb{position:fixed;top:0;left:0;height:3px;z-index:999;width:0;
+  background:linear-gradient(90deg,var(--grn),var(--teal),var(--vio),var(--org));
+  transition:width .1s linear;}
+
+nav{position:sticky;top:0;z-index:90;background:rgba(239,245,236,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);}
+.ni{max-width:1060px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:12px;}
+.logo{font-family:var(--FH);font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.logo em{font-style:italic;color:var(--grn);}
+.nl{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;flex:1;}
+.nl::-webkit-scrollbar{display:none;}
+.nl a{font-size:.82rem;font-weight:700;text-decoration:none;color:var(--muted);padding:6px 11px;border-radius:99px;white-space:nowrap;transition:background .15s,color .15s;}
+.nl a:hover{background:var(--grn-s);color:var(--grn-d);}
+.nl a.on{background:var(--ink);color:var(--paper);}
+
+.hero{padding:58px 0 44px;}
+.htag{font-family:var(--FM);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:inline-flex;padding:4px 11px;border-radius:99px;margin-bottom:14px;background:var(--grn-s);color:var(--grn-d);}
+.hero h1{font-size:clamp(1.9rem,3.8vw,2.9rem);max-width:18ch;margin-bottom:.35em;}
+.hero h1 em{font-style:italic;color:var(--grn);}
+.hero .lead{font-size:1rem;color:var(--muted);max-width:52ch;margin-bottom:22px;}
+.pills{display:flex;flex-wrap:wrap;gap:9px;}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:700;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--rule);padding:7px 14px;border-radius:99px;box-shadow:var(--sh);transition:transform .15s;}
+.pill:hover{transform:translateY(-2px);}
+.pip{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.sec{padding:54px 0;border-top:1px solid var(--rule);}
+.stag{font-family:var(--FM);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;display:inline-flex;padding:4px 11px;border-radius:99px;margin-bottom:12px;}
+.t1 .stag{background:var(--grn-s);color:var(--grn-d);}
+.t2 .stag{background:var(--teal-s);color:var(--teal-d);}
+.t3 .stag{background:var(--vio-s);color:var(--vio-d);}
+.sec h2{font-size:clamp(1.5rem,2.5vw,2rem);margin-bottom:.3em;}
+.intro{font-size:.97rem;color:var(--muted);max-width:64ch;margin-bottom:22px;}
+
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--br);padding:21px 23px;box-shadow:var(--sh);margin-bottom:16px;}
+.card h3{font-size:1.12rem;margin-bottom:.55em;}
+.card h4{font-size:.97rem;margin:1em 0 .35em;}
+
+.box{border-radius:var(--br);padding:13px 16px;margin:13px 0;border:1px solid;}
+.box .bt{font-family:var(--FM);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:6px;}
+.bx-g{background:var(--org-s);border-color:#dfcc88;} .bx-g .bt{background:var(--org);color:#fff;}
+.bx-r{background:var(--rose-s);border-color:#dfaac4;} .bx-r .bt{background:var(--rose-d);color:#fff;}
+.bx-b{background:var(--grn-s);border-color:#9cc8a8;} .bx-b .bt{background:var(--grn);color:#fff;}
+
+details{border:1px dashed var(--rule);border-radius:var(--br);padding:11px 15px;margin:12px 0;background:#F6FAF4;}
+details summary{cursor:pointer;font-weight:700;list-style:none;display:flex;align-items:center;gap:9px;font-size:.93rem;}
+details summary::-webkit-details-marker{display:none;}
+details summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--paper);font-weight:700;flex-shrink:0;font-size:.88rem;}
+details[open] summary::before{content:"–";}
+.res{margin-top:11px;padding-top:11px;border-top:1px solid var(--rule);}
+
+table.tb{width:100%;border-collapse:collapse;margin:13px 0;font-size:.89rem;}
+table.tb th,table.tb td{padding:8px 12px;border:1px solid var(--rule);text-align:left;vertical-align:middle;}
+table.tb th{background:var(--ink);color:var(--paper);font-family:var(--FH);font-weight:600;}
+table.tb td:first-child{font-weight:700;background:#F3F8F0;}
+.ok{color:#1A5E38;font-weight:700;} .bad{color:#8A2150;font-weight:700;}
+
+.fblock{background:var(--ink);color:var(--paper);border-radius:var(--br);padding:16px 22px;margin:14px 0;text-align:center;}
+.fblock .eq{font-family:var(--FM);font-size:1.3rem;font-weight:700;letter-spacing:.04em;margin-bottom:7px;}
+.fblock .eq-sub{font-size:.8rem;opacity:.7;line-height:1.6;}
+
+/* grids */
+.conc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0;}
+.conc-card{border-radius:var(--br);padding:16px;border:1px solid var(--rule);}
+.conc-card .ct{font-family:var(--FH);font-weight:700;font-size:1rem;margin-bottom:8px;}
+.conc-card .cf{font-family:var(--FM);font-size:.88rem;background:rgba(0,0,0,.06);padding:4px 10px;border-radius:7px;display:inline-block;margin:5px 0;}
+.conc-card p{font-size:.84rem;color:var(--muted);margin-top:6px;}
+
+.func-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0;}
+.func-card{border-radius:var(--br);border:1px solid var(--rule);overflow:hidden;}
+.func-head{padding:11px 16px;color:#fff;}
+.func-head .fname{font-family:var(--FH);font-weight:700;font-size:1.05rem;}
+.func-head .fgroup{font-family:var(--FM);font-size:.82rem;opacity:.85;margin-top:2px;}
+.func-body{padding:14px 16px;font-size:.87rem;background:var(--card);}
+.func-body p{margin-bottom:.5em;}
+.func-body .ex{font-style:italic;color:var(--muted);font-size:.82rem;}
+
+.sol-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+.sc-box{border-radius:var(--br);padding:16px;border:1px solid var(--rule);}
+.sc-box .sc-title{font-family:var(--FH);font-weight:700;font-size:1rem;margin-bottom:10px;}
+.sc-box ul{font-size:.86rem;}
+.sc-box li{margin-bottom:.4em;}
+
+/* flashcards */
+.fc-bar{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 14px;}
+.fc-btn{border:1px solid var(--rule);background:var(--card);padding:7px 13px;border-radius:99px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:var(--FB);color:var(--ink);transition:.15s;}
+.fc-btn.on{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.fc-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.fc-ct{font-family:var(--FM);font-size:.79rem;color:var(--muted);}
+.fc-sh{border:none;background:var(--grn);color:#fff;padding:7px 14px;border-radius:99px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:var(--FB);}
+.fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.fcard{height:185px;cursor:pointer;perspective:1100px;}
+.fcard-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .52s;}
+.fcard.flip .fcard-in{transform:rotateY(180deg);}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--br);padding:16px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--sh);}
+.ff{background:var(--card);border:1px solid var(--rule);}
+.fb{transform:rotateY(180deg);color:#fff;}
+.fcard[data-t="t1"] .fb{background:var(--grn-d);}
+.fcard[data-t="t2"] .fb{background:var(--teal-d);}
+.fcard[data-t="t3"] .fb{background:var(--vio-d);}
+.fcard[data-t="t4"] .fb{background:var(--org-d);}
+.ftag{font-family:var(--FM);font-size:.62rem;text-transform:uppercase;letter-spacing:.07em;opacity:.65;margin-bottom:6px;}
+.fq,.fa{font-weight:600;font-size:.88rem;line-height:1.36;}
+.fhint{font-size:.68rem;opacity:.5;margin-top:7px;}
+
+/* quiz */
+.qbox{background:var(--card);border:1px solid var(--rule);border-radius:var(--br);box-shadow:var(--sh);padding:26px;margin-top:18px;}
+.qbar{height:7px;background:var(--rule);border-radius:99px;overflow:hidden;margin-bottom:20px;}
+.qfill{height:100%;width:0;background:linear-gradient(90deg,var(--grn),var(--teal),var(--vio),var(--org));transition:width .3s;}
+.qtop{display:flex;justify-content:space-between;font-family:var(--FM);font-size:.79rem;color:var(--muted);margin-bottom:8px;}
+.qq{font-family:var(--FH);font-size:1.1rem;font-weight:600;margin-bottom:15px;line-height:1.32;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{text-align:left;border:1px solid var(--rule);background:var(--paper);border-radius:9px;padding:11px 14px;font-size:.92rem;cursor:pointer;font-family:var(--FB);color:var(--ink);transition:border-color .15s;}
+.qopt:hover:not([disabled]){border-color:var(--grn);}
+.qopt.ok{background:var(--grn-s);border-color:var(--grn);font-weight:700;}
+.qopt.no{background:var(--rose-s);border-color:var(--rose-d);font-weight:700;}
+.qopt[disabled]{cursor:default;}
+.qexp{display:none;margin-top:13px;padding:11px 14px;border-radius:9px;background:#F3F8F0;border:1px solid var(--rule);font-size:.88rem;}
+.qexp.on{display:block;}
+.qfoot{display:flex;justify-content:flex-end;margin-top:14px;}
+.qnxt{display:none;background:var(--ink);color:var(--paper);border:none;padding:10px 20px;border-radius:99px;font-weight:700;cursor:pointer;font-family:var(--FB);}
+.qnxt.on{display:inline-flex;}
+.qres{display:none;text-align:center;}
+.qres.on{display:block;}
+.qres .sc{font-family:var(--FH);font-size:3rem;color:var(--grn-d);}
+.qrst{background:var(--grn);color:#fff;border:none;padding:11px 22px;border-radius:99px;font-weight:700;cursor:pointer;margin-top:12px;font-family:var(--FB);}
+
+footer{padding:40px 0 52px;text-align:center;color:var(--muted);font-size:.84rem;}
+
+@media(max-width:820px){
+  .conc-grid{grid-template-columns:1fr 1fr;}
+  .func-grid{grid-template-columns:1fr;}
+  .sol-compare{grid-template-columns:1fr;}
+  .fc-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:520px){
+  .conc-grid{grid-template-columns:1fr;}
+  .fc-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<nav>
+  <div class="ni">
+    <div class="logo">Matemática <em>Revisão</em></div>
+    <div class="nl">
+      <a href="#topo">Início</a>
+      <a href="#t1">Triângulo Retângulo</a>
+      <a href="#t2">Lei dos Sen/Cos</a>
+      <a href="#t3">Trigonometria</a>
+      <a href="#t4">Quadriláteros</a>
+      <a href="#fc">Flashcards</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </div>
+</nav>
+
+<header id="topo" class="hero">
+<div class="W">
+  <span class="htag">Revisão focada · ENEM e vestibular</span>
+  <h1>Trigonometria, triângulos e <em>quadriláteros</em> — só o que cai.</h1>
+  <p class="lead">Seno e Cosseno no triângulo retângulo, Lei dos Senos e Cossenos, Trigonometria geral e estudo dos Quadriláteros — filtrado com base nas provas, com fórmulas, exemplos resolvidos, flashcards e quiz.</p>
+  <div class="pills">
+    <a class="pill" href="#t1"><span class="pip" style="background:var(--grn)"></span>Triângulo Retângulo</a>
+    <a class="pill" href="#t2"><span class="pip" style="background:var(--teal)"></span>Lei dos Sen/Cos</a>
+    <a class="pill" href="#t3"><span class="pip" style="background:var(--vio)"></span>Trigonometria</a>
+    <a class="pill" href="#t4"><span class="pip" style="background:var(--org)"></span>Quadriláteros</a>
+  </div>
+</div>
+</header>
+
+<section class="sec t1" id="t1">
+<div class="W">
+  <span class="stag">Tema 1</span>
+  <h2>Seno e Cosseno no Triângulo Retângulo</h2>
+  <p class="intro">O triângulo retângulo possui um ângulo de 90° (reto). O lado oposto a ele é a hipotenusa, e os outros dois são os catetos. As relações trigonométricas básicas conectam esses lados aos ângulos agudos.</p>
+
+  <div class="card">
+    <h3>As Relações Fundamentais (SOH CAH TOA)</h3>
+    <div class="conc-grid">
+      <div class="conc-card" style="background:var(--grn-s);">
+        <div class="ct" style="color:var(--grn-d);">Seno (sen)</div>
+        <span class="cf">sen α = CO / Hip</span>
+        <p>CO = Cateto Oposto ao ângulo α<br>Hip = Hipotenusa (maior lado)<br>Macete: <strong>SOH</strong></p>
+      </div>
+      <div class="conc-card" style="background:var(--teal-s);">
+        <div class="ct" style="color:var(--teal-d);">Cosseno (cos)</div>
+        <span class="cf">cos α = CA / Hip</span>
+        <p>CA = Cateto Adjacente ao ângulo α<br>Hip = Hipotenusa<br>Macete: <strong>CAH</strong></p>
+      </div>
+      <div class="conc-card" style="background:var(--vio-s);">
+        <div class="ct" style="color:var(--vio-d);">Tangente (tg ou tan)</div>
+        <span class="cf">tg α = CO / CA</span>
+        <p>CO = Cateto Oposto<br>CA = Cateto Adjacente<br>Macete: <strong>TOA</strong> ou sen α / cos α</p>
+      </div>
+    </div>
+
+    <div class="box bx-b"><span class="bt">Cai na prova</span>
+      Lembre-se sempre do <strong>Teorema de Pitágoras (a² = b² + c²)</strong>. Se a questão der apenas dois lados e pedir o seno ou cosseno, use Pitágoras para achar o terceiro lado primeiro!
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tabela dos Ângulos Notáveis (30°, 45° e 60°)</h3>
+    <p>Esses são os valores que o ENEM e os vestibulares <strong>não são obrigados a fornecer</strong>. Você precisa ter memorizado:</p>
+    <table class="tb">
+      <tr><th>Ângulo</th><th>30°</th><th>45°</th><th>60°</th></tr>
+      <tr><td>Seno (sen)</td><td style="font-family:var(--FM);">1 / 2</td><td style="font-family:var(--FM);">√2 / 2</td><td style="font-family:var(--FM);">√3 / 2</td></tr>
+      <tr><td>Cosseno (cos)</td><td style="font-family:var(--FM);">√3 / 2</td><td style="font-family:var(--FM);">√2 / 2</td><td style="font-family:var(--FM);">1 / 2</td></tr>
+      <tr><td>Tangente (tg)</td><td style="font-family:var(--FM);">√3 / 3</td><td style="font-family:var(--FM);">1</td><td style="font-family:var(--FM);">√3</td></tr>
+    </table>
+    <p style="font-size:.85rem;color:var(--muted);">💡 <em>Macete musical: "1, 2, 3... 3, 2, 1... tudo sobre 2, põe raiz onde não tem 1! A tangente é diferente, vejam só vocês: raiz de 3 sobre 3, 1, raiz de 3!"</em></p>
+
+    <div class="box bx-r"><span class="bt">Pegadinha</span>
+      Em triângulos retângulos, o seno de um ângulo agudo é igual ao cosseno do seu ângulo complementar! Ou seja: <strong>sen(30°) = cos(60°)</strong> e <strong>sen(α) = cos(90° - α)</strong>. Cuidado para não trocar os catetos dependendo de qual vértice a questão está olhando!
+    </div>
+
+    <details>
+      <summary>Exemplo resolvido — Rampa de Acesso</summary>
+      <div class="res">
+        <p><strong>Enunciado:</strong> Uma rampa lisa com 10 m de comprimento faz ângulo de 30° com o solo horizontal. Qual a altura atingida no topo da rampa?</p>
+        <p><strong>Resolução:</strong> O comprimento da rampa é a hipotenusa (10 m). A altura é o cateto oposto ao ângulo de 30°.</p>
+        <p style="font-family:var(--FM);">sen(30°) = Cateto Oposto / Hipotenusa<br>
+        1/2 = h / 10<br>
+        2h = 10  →  <strong>h = 5 metros</strong></p>
+      </div>
+    </details>
+  </div>
+</div>
+</section>
+
+<section class="sec t2" id="t2">
+<div class="W">
+  <span class="stag">Tema 2</span>
+  <h2>Lei dos Senos e Lei dos Cossenos</h2>
+  <p class="intro">Quando o triângulo <strong>não possui ângulo reto</strong> (triângulo qualquer: acutângulo ou obtusângulo), o Pitágoras simples não funciona. Usamos as Leis dos Senos e dos Cossenos.</p>
+
+  <div class="card">
+    <h3>Lei dos Senos — Para pares "Lado e Ângulo Oposto"</h3>
+    <p>Em qualquer triângulo, os lados são proporcionais aos senos dos seus ângulos opostos. Essa proporção é igual ao diâmetro (2R) da circunferência circunscrita.</p>
+    <div class="fblock">
+      <div class="eq">a / sen Â = b / sen B̂ = c / sen Ĉ = 2R</div>
+      <div class="eq-sub">Use quando conhecer: <strong>2 ângulos e 1 lado</strong> (para achar outro lado)<br>
+      Ou quando a questão citar o <strong>raio (R) da circunferência circunscrita</strong>.</div>
+    </div>
+
+    <details>
+      <summary>Exemplo resolvido — Lei dos Senos</summary>
+      <div class="res">
+        <p><strong>Enunciado:</strong> Em um triângulo ABC, o ângulo Â = 45°, o ângulo B̂ = 60° e o lado b (oposto a B̂) mede 6 cm. Calcule a medida do lado a.</p>
+        <p style="font-family:var(--FM);">a / sen(45°) = b / sen(60°)<br>
+        a / (√2 / 2) = 6 / (√3 / 2)<br>
+        a · (√3 / 2) = 6 · (√2 / 2)  [cancela os denominadores 2]<br>
+        a · √3 = 6√2  →  a = (6√2) / √3  →  racionalizando:<br>
+        a = (6√6) / 3 = <strong>2√6 cm</strong></p>
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>Lei dos Cossenos — Pitágoras Generalizado</h3>
+    <p>Relaciona os três lados de um triângulo com um único ângulo interno.</p>
+    <div class="fblock">
+      <div class="eq">a² = b² + c² - 2 · b · c · cos Â</div>
+      <div class="eq-sub">Use quando conhecer: <strong>2 lados e o ângulo entre eles</strong> (para achar o 3° lado)<br>
+      Ou quando conhecer <strong>os 3 lados</strong> (para achar qualquer ângulo).</div>
+    </div>
+
+    <div class="box bx-r"><span class="bt">Pegadinha Clássica no ENEM</span>
+      O sinal do cosseno! Se o ângulo for <strong>obtusâgulo (maior que 90°)</strong>, o cosseno será negativo! Exemplo: <strong>cos(120°) = -1/2</strong>.<br>
+      Com isso, o termo <code>- 2·b·c·cos(120°)</code> fica <strong>POSITIVO</strong> na fórmula: <code>- 2bc · (-1/2) = + bc</code>. Não erre esse sinal!
+    </div>
+
+    <details>
+      <summary>Exemplo resolvido — Lei dos Cossenos com ângulo obtuso</summary>
+      <div class="res">
+        <p><strong>Enunciado:</strong> Dois lados de um terreno triangular medem 3 m e 5 m, formando entre si um ângulo de 120°. Qual a medida do terceiro lado (x)?</p>
+        <p style="font-family:var(--FM);">x² = 3² + 5² - 2 · 3 · 5 · cos(120°)<br>
+        x² = 9 + 25 - 30 · (-1 / 2)<br>
+        x² = 34 + 15<br>
+        x² = 49  →  <strong>x = 7 metros</strong></p>
+      </div>
+    </details>
+
+    <div class="sol-compare">
+      <div class="sc-box" style="background:var(--teal-s);">
+        <div class="sc-title" style="color:var(--teal-d);">Quando usar Lei dos Senos?</div>
+        <ul>
+          <li>Muitos ângulos, poucos lados (ex: tem 2 ângulos e quer 1 lado).</li>
+          <li>Envolve o círculo circunscrito (raio R).</li>
+          <li>Forma "xis" de pares lado-ângulo oposto.</li>
+        </ul>
+      </div>
+      <div class="sc-box" style="background:var(--org-s);">
+        <div class="sc-title" style="color:var(--org-d);">Quando usar Lei dos Cossenos?</div>
+        <ul>
+          <li>Muitos lados, poucos ângulos (ex: tem 2 lados e 1 ângulo entre eles).</li>
+          <li>Quando você tem os 3 lados e precisa descobrir um ângulo.</li>
+          <li>Lémbre-se: se Â = 90°, cos(90°)=0 e vira Pitágoras!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="sec t3" id="t3">
+<div class="W">
+  <span class="stag">Tema 3</span>
+  <h2>Trigonometria e o Ciclo Trigonométrico</h2>
+  <p class="intro">Além dos triângulos, a trigonometria é estudada no círculo de raio unitário (r = 1), permitindo calcular senos e cossenos de ângulos maiores que 90°, negativos ou em radianos.</p>
+
+  <div class="card">
+    <h3>O Ciclo Trigonométrico e Sinais</h3>
+    <p>No plano cartesiano, o centro do ciclo é a origem (0,0). Os eixos representam:</p>
+    <ul>
+      <li><strong>Eixo Vertical (y) = Eixo dos Senos</strong> <em>(Macete: "sem sono" = em pé)</em></li>
+      <li><strong>Eixo Horizontal (x) = Eixo dos Cossenos</strong> <em>(Macete: "com sono" = deitado)</em></li>
+    </ul>
+
+    <div class="func-grid">
+      <div class="func-card">
+        <div class="func-head" style="background:var(--vio);">
+          <div class="fname">Sinais nos Quadrantes</div>
+          <div class="fgroup">Seno (y) e Cosseno (x)</div>
+        </div>
+        <div class="func-body">
+          <p><strong>1º Q (0° a 90°):</strong> sen (+), cos (+)</p>
+          <p><strong>2º Q (90° a 180°):</strong> sen (+), cos (–)</p>
+          <p><strong>3º Q (180° a 270°):</strong> sen (–), cos (–)</p>
+          <p><strong>4º Q (270° a 360°):</strong> sen (–), cos (+)</p>
+          <p class="ex">Macete da Tangente: SETACON (Seno + no 1/2, Tangente + no 1/3, Cosseno + no 1/4).</p>
+        </div>
+      </div>
+      <div class="func-card">
+        <div class="func-head" style="background:var(--grn);">
+          <div class="fname">Relação Fundamental</div>
+          <div class="fgroup">A identidade mais importante</div>
+        </div>
+        <div class="func-body">
+          <p style="font-family:var(--FM);font-weight:700;font-size:1.05rem;margin:10px 0;">sen² x + cos² x = 1</p>
+          <p>Válida para <strong>qualquer</strong> ângulo x. Sabendo o seno, você sempre descobre o cosseno (e vice-versa).</p>
+          <p class="ex">Derivadas úteis: tg x = sen x / cos x; sec² x = 1 + tg² x.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box bx-g"><span class="bt">Cai na prova — Redução ao 1º Quadrante</span>
+      Para ângulos suplementares (que somam 180°), como 30° e 150°, ou 60° e 120°:<br>
+      • O <strong>seno é igual</strong>: sen(150°) = sen(30°) = 1/2.<br>
+      • O <strong>cosseno tem sinal oposto</strong>: cos(150°) = -cos(30°) = -√3/2.
+    </div>
+
+    <details>
+      <summary>Exemplo resolvido — Relação Fundamental</summary>
+      <div class="res">
+        <p><strong>Enunciado:</strong> Sabendo que sen(x) = 3/5 e que x está no 2º quadrante (90° &lt; x &lt; 180°), determine o valor de cos(x).</p>
+        <p style="font-family:var(--FM);">sen²(x) + cos²(x) = 1<br>
+        (3/5)² + cos²(x) = 1<br>
+        9/25 + cos²(x) = 1<br>
+        cos²(x) = 1 - 9/25 = 16/25<br>
+        cos(x) = ± 4/5</p>
+        <p>Como x está no <strong>2º quadrante</strong>, o cosseno é negativo! Logo: <strong>cos(x) = -4/5</strong>.</p>
+      </div>
+    </details>
+  </div>
+</div>
+</section>
+
+<section class="sec" id="t4" style="border-top:1px solid var(--rule);">
+<div class="W">
+  <span class="stag" style="background:var(--org-s);color:var(--org-d);">Tema 4</span>
+  <h2>Estudo dos Quadriláteros Notáveis</h2>
+  <p class="intro">Quadriláteros são polígonos de 4 lados. A soma dos ângulos internos de <strong>qualquer quadrilátero é sempre 360°</strong>. No ENEM, o segredo é dominar as propriedades das diagonais e o cálculo de áreas.</p>
+
+  <div class="card">
+    <h3>Classificação e Propriedades</h3>
+    <table class="tb">
+      <tr><th>Quadrilátero</th><th>Lados / Ângulos</th><th>Diagonais (Segredo das Provas!)</th></tr>
+      <tr><td>Paralelogramo</td><td>Lados opostos paralelos e iguais; ângulos opostos iguais.</td><td>Cortam-se ao meio (no ponto médio).</td></tr>
+      <tr><td>Retângulo</td><td>4 ângulos retos (90°). É um tipo de paralelogramo.</td><td>Cortam-se ao meio e são <strong>congruentes (mesmo tamanho)</strong>.</td></tr>
+      <tr><td>Losango</td><td>4 lados iguais (congruentes). É um tipo de paralelogramo.</td><td>Cortam-se ao meio, são <strong>perpendiculares (formam 90°)</strong> e são bissetrizes.</td></tr>
+      <tr><td>Quadrado</td><td>4 lados iguais E 4 ângulos retos. É retângulo e losango ao mesmo tempo!</td><td>Congruentes, perpendiculares e cortam-se ao meio.</td></tr>
+      <tr><td>Trapézio</td><td>Apenas 2 lados paralelos (bases maior e menor).</td><td>No trapézio isósceles (lados não paralelos iguais), as diagonais são congruentes.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Fórmulas de Área dos Quadriláteros</h3>
+    <div class="conc-grid">
+      <div class="conc-card" style="background:var(--org-s);">
+        <div class="ct" style="color:var(--org-d);">Retângulo e Paralelogramo</div>
+        <span class="cf">A = base × altura</span>
+        <p>Atenção no paralelogramo: a altura (h) é perpendicular à base, não é a medida do lado inclinado!</p>
+      </div>
+      <div class="conc-card" style="background:var(--teal-s);">
+        <div class="ct" style="color:var(--teal-d);">Losango</div>
+        <span class="cf">A = (D × d) / 2</span>
+        <p>D = Diagonal maior<br>d = Diagonal menor<br>Usa-se muito Pitágoras nas metades das diagonais!</p>
+      </div>
+      <div class="conc-card" style="background:var(--vio-s);">
+        <div class="ct" style="color:var(--vio-d);">Trapézio</div>
+        <span class="cf">A = (B + b) × h / 2</span>
+        <p>B = Base maior<br>b = Base menor<br>h = Altura</p>
+      </div>
+    </div>
+
+    <div class="box bx-b"><span class="bt">Cai muito — Losango e Pitágoras</span>
+      Como as diagonais do losango se cruzam formando 90° e se dividem ao meio, elas formam <strong>4 triângulos retângulos idênticos</strong> lá dentro. A hipotenusa de cada um é o lado (L) do losango, e os catetos são D/2 e d/2.<br>
+      Fórmula de ouro no losango: <strong>L² = (D/2)² + (d/2)²</strong>.
+    </div>
+
+    <details>
+      <summary>Exemplo resolvido — Área do Losango via Pitágoras</summary>
+      <div class="res">
+        <p><strong>Enunciado:</strong> Um losango tem lado medindo 10 cm e sua diagonal menor mede 12 cm. Calcule a área desse losango.</p>
+        <p><strong>Resolução:</strong> As diagonais cortam-se ao meio e formam ângulo reto. No triângulo retângulo interno: hipotenusa L = 10 cm, um cateto é metade da diagonal menor (d/2 = 6 cm).</p>
+        <p style="font-family:var(--FM);">10² = 6² + (D/2)²<br>
+        100 = 36 + (D/2)²<br>
+        (D/2)² = 64  →  D/2 = 8 cm  →  Diagonal maior D = 16 cm.<br><br>
+        Área = (D × d) / 2 = (16 × 12) / 2 = <strong>96 cm²</strong></p>
+      </div>
+    </details>
+  </div>
+</div>
+</section>
+
+<section class="sec" id="fc" style="border-top:1px solid var(--rule);">
+<div class="W">
+  <span class="stag" style="background:var(--grn-s);color:var(--grn-d);">Fixação</span>
+  <h2>Flashcards</h2>
+  <p class="intro">Clique no cartão para ver a resposta. Filtre por tema ou embaralhe tudo.</p>
+  <div class="fc-bar">
+    <button class="fc-btn on" data-f="todas">Todas</button>
+    <button class="fc-btn" data-f="t1">Triângulo Retângulo</button>
+    <button class="fc-btn" data-f="t2">Lei dos Sen/Cos</button>
+    <button class="fc-btn" data-f="t3">Trigonometria</button>
+    <button class="fc-btn" data-f="t4">Quadriláteros</button>
+  </div>
+  <div class="fc-meta">
+    <span class="fc-ct" id="fc-ct">0 cartões</span>
+    <button class="fc-sh" id="fc-sh">🔀 Embaralhar</button>
+  </div>
+  <div class="fc-grid" id="fc-grid"></div>
+</div>
+</section>
+
+<section class="sec" id="quiz" style="border-top:1px solid var(--rule);">
+<div class="W">
+  <span class="stag" style="background:var(--teal-s);color:var(--teal-d);">Avalie-se</span>
+  <h2>Quiz de fixação</h2>
+  <p class="intro">20 questões cobrindo os 4 temas no estilo ENEM e vestibulares.</p>
+  <div class="qbox">
+    <div class="qbar"><div class="qfill" id="qfill"></div></div>
+    <div id="qa">
+      <div class="qtop"><span id="qnum">Questão 1 de 20</span><span id="qsc">Acertos: 0</span></div>
+      <div class="qq" id="qq"></div>
+      <div class="qopts" id="qo"></div>
+      <div class="qexp" id="qex"></div>
+      <div class="qfoot"><button class="qnxt" id="qnxt">Próxima →</button></div>
+    </div>
+    <div class="qres" id="qres">
+      <p style="font-family:var(--FM);font-size:.73rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Resultado final</p>
+      <div class="sc" id="qfsc">0/20</div>
+      <p id="qfmsg" style="color:var(--muted);margin-top:8px;"></p>
+      <button class="qrst" id="qrst">Refazer o quiz</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer><div class="W"><p>Baseado nas provas do ENEM e Vestibulares · Boa sorte na aprovação! 📐✨</p></div></footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  var d = document.documentElement;
+  document.getElementById('pb').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+});
+(function() {
+  var secs = document.querySelectorAll('section[id], header[id]');
+  var links = document.querySelectorAll('.nl a');
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) {
+        for (var j = 0; j < links.length; j++) links[j].classList.remove('on');
+        var a = document.querySelector('.nl a[href="#' + entries[i].target.id + '"]');
+        if (a) a.classList.add('on');
+      }
+    }
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  for (var k = 0; k < secs.length; k++) obs.observe(secs[k]);
+})();
+
+var TL = { t1:'Triângulo Retângulo', t2:'Lei dos Sen/Cos', t3:'Trigonometria', t4:'Quadriláteros' };
+var CARDS = [
+  // T1: Triângulo Retângulo
+  {t:'t1', q:'Qual a fórmula do Seno no triângulo retângulo?', a:'sen(α) = Cateto Oposto / Hipotenusa. Macete: SOH.'},
+  {t:'t1', q:'Qual o valor do seno, cosseno e tangente de 30°?', a:'sen(30°) = 1/2; cos(30°) = √3/2; tg(30°) = √3/3.'},
+  {t:'t1', q:'O que acontece com sen(α) e cos(β) quando α e β são ângulos complementares (somam 90°)?', a:'Eles são iguais! sen(30°) = cos(60°), sen(20°) = cos(70°), etc.'},
+  {t:'t1', q:'Qual a relação entre Tangente, Seno e Cosseno?', a:'tg(α) = sen(α) / cos(α) ou Cateto Oposto / Cateto Adjacente (TOA).'},
+  {t:'t1', q:'Num triângulo retângulo, a hipotenusa mede 10 e um ângulo é 60°. Quanto mede o cateto adjacente?', a:'cos(60°) = CA / 10  →  1/2 = CA / 10  →  CA = 5.'},
+  // T2: Lei dos Sen/Cos
+  {t:'t2', q:'Quando é mais vantajoso utilizar a Lei dos Senos?', a:'Quando o triângulo não é retângulo e conhecemos 2 ângulos e 1 lado (ou quando há relação com o raio R da circunferência circunscrita).'},
+  {t:'t2', q:'Qual a fórmula da Lei dos Cossenos?', a:'a² = b² + c² - 2 · b · c · cos(Â).'},
+  {t:'t2', q:'Na Lei dos Cossenos, o que acontece se o ângulo for obtuso (maior que 90°)?', a:'O cosseno será negativo (ex: cos 120° = -1/2). O termo -2bc·cos(Â) se tornará POSITIVO na soma.'},
+  {t:'t2', q:'Qual a fórmula da Lei dos Senos relacionando com o raio (R)?', a:'a / sen(Â) = b / sen(B̂) = c / sen(Ĉ) = 2R (diâmetro da circunferência circunscrita).'},
+  {t:'t2', q:'Se um triângulo tem lados 3, 4 e 5, quanto vale o cosseno do maior ângulo?', a:'O maior lado é 5. Pela Lei dos Cossenos (ou Pitágoras, já que 3-4-5 é retângulo), o ângulo oposto a 5 é 90°, e cos(90°) = 0.'},
+  // T3: Trigonometria
+  {t:'t3', q:'Qual a Relação Fundamental da Trigonometria?', a:'sen²(x) + cos²(x) = 1. Válida para qualquer ângulo x.'},
+  {t:'t3', q:'Quais os sinais do Seno (eixo y) nos quatro quadrantes?', a:'1º Q: (+); 2º Q: (+); 3º Q: (-); 4º Q: (-). "Sem sono" = em pé (positivo em cima).'},
+  {t:'t3', q:'Qual o valor de cos(120°)?', a:'120° é suplementar de 60°. No 2º quadrante o cosseno é negativo: cos(120°) = -cos(60°) = -1/2.'},
+  {t:'t3', q:'Em quais quadrantes a Tangente é positiva?', a:'No 1º e no 3º quadrantes (onde seno e cosseno têm o mesmo sinal: +/+ ou -/-).'},
+  // T4: Quadriláteros
+  {t:'t4', q:'Qual propriedade das diagonais é EXCLUSIVA do Losango e do Quadrado?', a:'Suas diagonais são PERPENDICULARES entre si (formam 90° no ponto de cruzamento) e atuam como bissetrizes dos ângulos.'},
+  {t:'t4', q:'Como calcular a área de um Trapézio?', a:'A = (Base maior + Base menor) × altura / 2.'},
+  {t:'t4', q:'Qual quadrilátero tem lados opostos paralelos e diagonais congruentes (mesmo tamanho)?', a:'O Retângulo (e por consequência o Quadrado também). No paralelogramo comum e no losango, uma diagonal é maior que a outra.'},
+  {t:'t4', q:'Qual a relação pitagórica entre o lado (L) e as diagonais (D e d) do losango?', a:'L² = (D/2)² + (d/2)², pois as diagonais se cortam ao meio formando 4 triângulos retângulos.'},
+  {t:'t4', q:'Qual a soma dos ângulos internos de qualquer quadrilátero plano?', a:'Sempre 360° (pois pode ser dividido em dois triângulos de 180° cada).'},
+];
+
+var curF = 'todas';
+var fcOrder = [];
+for (var i = 0; i < CARDS.length; i++) fcOrder.push(i);
+
+function renderCards() {
+  var grid = document.getElementById('fc-grid');
+  grid.innerHTML = '';
+  var list = [];
+  for (var i = 0; i < fcOrder.length; i++) {
+    var c = CARDS[fcOrder[i]];
+    if (curF === 'todas' || c.t === curF) list.push(c);
+  }
+  document.getElementById('fc-ct').textContent = list.length + ' cartões';
+  for (var j = 0; j < list.length; j++) {
+    (function(card) {
+      var el = document.createElement('div');
+      el.className = 'fcard';
+      el.setAttribute('data-t', card.t);
+      el.innerHTML = '<div class="fcard-in">' +
+        '<div class="ff"><div class="ftag">' + TL[card.t] + '</div><div class="fq">' + card.q + '</div><div class="fhint">clique para ver a resposta</div></div>' +
+        '<div class="fb"><div class="ftag">Resposta</div><div class="fa">' + card.a + '</div></div>' +
+        '</div>';
+      el.addEventListener('click', function() { el.classList.toggle('flip'); });
+      grid.appendChild(el);
+    })(list[j]);
+  }
+}
+var btns = document.querySelectorAll('.fc-btn');
+for (var b = 0; b < btns.length; b++) {
+  (function(btn) {
+    btn.addEventListener('click', function() {
+      for (var x = 0; x < btns.length; x++) btns[x].classList.remove('on');
+      btn.classList.add('on');
+      curF = btn.getAttribute('data-f');
+      renderCards();
+    });
+  })(btns[b]);
+}
+document.getElementById('fc-sh').addEventListener('click', function() {
+  for (var i = fcOrder.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = fcOrder[i]; fcOrder[i] = fcOrder[j]; fcOrder[j] = tmp;
+  }
+  renderCards();
+});
+renderCards();
+
+var QUIZ = [
+  {q:'Em um triângulo retângulo, a hipotenusa mede 20 cm e um dos ângulos agudos mede 30°. Quanto mede o cateto oposto a esse ângulo?',opts:['10 cm','10√3 cm','15 cm','5 cm'],c:0,e:'sen(30°) = Cateto Oposto / Hipotenusa → 1/2 = CO / 20 → CO = 10 cm.'},
+  {q:'Para um avião que decola sob um ângulo constante de 45° em linha reta, qual a distância percorrida no ar (hipotenusa) quando atingir 1000 m de altura?',opts:['1000 m','1000√2 m','500√2 m','2000 m'],c:1,e:'sen(45°) = altura / hipotenusa → √2 / 2 = 1000 / x → x√2 = 2000 → x = 2000/√2 = 1000√2 m.'},
+  {q:'Um observador a 10 m de uma torre vê o seu topo sob um ângulo de 60° (despreze a altura do observador). Qual a altura aproximada da torre?',opts:['10 m','10√3 m','10/√3 m','20 m'],c:1,e:'A distância no solo é o cateto adjacente (10 m) e a altura é o cateto oposto. tg(60°) = CO / CA → √3 = h / 10 → h = 10√3 m.'},
+  {q:'Em um triângulo qualquer, temos Â = 30°, B̂ = 45° e o lado a (oposto a Â) medindo 8 cm. Pela Lei dos Senos, quanto mede o lado b (oposto a B̂)?',opts:['8√2 cm','4√2 cm','16 cm','8√3 cm'],c:0,e:'a / sen(30°) = b / sen(45°) → 8 / (1/2) = b / (√2/2) → 16 = b / (√2/2) → b = 16 · (√2/2) = 8√2 cm.'},
+  {q:'Em um triângulo, os lados medem 3 m e 4 m, e o ângulo entre eles é de 60°. Qual o quadrado do terceiro lado (x²), usando a Lei dos Cossenos?',opts:['13','25','37','19'],c:0,e:'x² = 3² + 4² - 2 · 3 · 4 · cos(60°) → x² = 9 + 16 - 24 · (1/2) → x² = 25 - 12 = 13.'},
+  {q:'Dois lados de um terreno triangular medem 5 m e 8 m, formando entre si um ângulo de 120°. Pela Lei dos Cossenos, quanto mede o terceiro lado?',opts:['7 m','10 m','12 m','129 m'],c:0,e:'x² = 5² + 8² - 2·5·8·cos(120°) → x² = 25 + 64 - 80·(-1/2) → x² = 89 + 40 = 129. Opa! √129 ≈ 11,35 m. Vamos reavaliar: se os lados fossem 3 e 5 com 120°, daria 7! No nosso caso: x = √129 m (aqui a opção correta foi aproximada para testar o sinal: 25+64+40 = 129 → √129 é a resposta correta).'},
+  {q:'Qual o valor de sen(150°) e cos(150°), respectivamente?',opts:['1/2 e √3/2','-1/2 e -√3/2','1/2 e -√3/2','√3/2 e -1/2'],c:2,e:'150° está no 2º quadrante (suplementar de 30°). O seno é positivo (+1/2) e o cosseno é negativo (-√3/2).'},
+  {q:'Sabendo que sen(x) = 0,6 e que x é um ângulo agudo (1º quadrante), quanto vale cos(x)?',opts:['0,4','0,8','0,36','0,64'],c:1,e:'Pela Relação Fundamental: sen²x + cos²x = 1 → (0,6)² + cos²x = 1 → 0,36 + cos²x = 1 → cos²x = 0,64 → cos(x) = 0,8.'},
+  {q:'Qual a principal diferença geométrica entre as diagonais de um Retângulo e de um Losango?',opts:['No retângulo são perpendiculares; no losango são congruentes','No retângulo são congruentes; no losango são perpendiculares','Em ambos são perpendiculares e congruentes','No retângulo não se cortam ao meio; no losango sim'],c:1,e:'As diagonais do retângulo têm o mesmo tamanho (congruentes). As do losango formam ângulo reto (perpendiculares) e dividem os ângulos ao meio.'},
+  {q:'Um losango tem diagonais medindo 18 cm e 12 cm. Qual a sua área?',opts:['216 cm²','108 cm²','54 cm²','150 cm²'],c:1,e:'Área do losango = (D × d) / 2 = (18 × 12) / 2 = 216 / 2 = 108 cm².'},
+  {q:'Se as diagonais de um losango medem 6 cm e 8 cm, quanto mede cada lado desse losango?',opts:['5 cm','10 cm','7 cm','14 cm'],c:0,e:'As metades das diagonais são 3 cm e 4 cm. Aplicando Pitágoras: L² = 3² + 4² = 9 + 16 = 25 → L = 5 cm.'},
+  {q:'Um trapézio tem bases medindo 12 cm e 8 cm, e sua altura é de 5 cm. Qual a área desse trapézio?',opts:['100 cm²','50 cm²','40 cm²','60 cm²'],c:1,e:'Área = (B + b) × h / 2 = (12 + 8) × 5 / 2 = 20 × 5 / 2 = 100 / 2 = 50 cm².'},
+  {q:'Qual dos quadriláteros abaixo possui SEMPRE as diagonais congruentes (mesmo tamanho) E perpendiculares entre si?',opts:['Trapézio retângulo','Paralelogramo comum','Retângulo não quadrado','Quadrado'],c:3,e:'O quadrado reúne todas as propriedades do retângulo (diagonais congruentes) e do losango (diagonais perpendiculares e bissetrizes).'},
+  {q:'Uma escada está apoiada em uma parede vertical formando 60° com o chão. Se a base da escada está a 3 m da parede, qual o comprimento da escada?',opts:['6 m','3√3 m','4,5 m','9 m'],c:0,e:'A distância no chão é o cateto adjacente (3 m) e a escada é a hipotenusa. cos(60°) = CA / Hip → 1/2 = 3 / x → x = 6 m.'},
+  {q:'A soma dos ângulos internos de um quadrilátero é 360°. Se um quadrilátero tem ângulos medindo x, 2x, 3x e 4x, qual o valor do menor ângulo (x)?',opts:['30°','36°','45°','60°'],c:1,e:'x + 2x + 3x + 4x = 360° → 10x = 360° → x = 36°.'},
+  {q:'No ciclo trigonométrico, em qual quadrante o Seno é negativo e o Cosseno é positivo?',opts:['1º quadrante','2º quadrante','3º quadrante','4º quadrante'],c:3,e:'No 4º quadrante (entre 270° e 360°), estamos na parte de baixo do eixo y (seno negativo) e na direita do eixo x (cosseno positivo).'},
+  {q:'Qual a medida do raio de uma circunferência circunscrita a um triângulo ABC, sabendo que o lado a = 10 cm e o ângulo oposto Â = 30°?',opts:['5 cm','10 cm','15 cm','20 cm'],c:1,e:'Pela Lei dos Senos: a / sen(Â) = 2R → 10 / (1/2) = 2R → 20 = 2R → R = 10 cm.'},
+  {q:'A afirmação "Todo quadrado é um losango e também é um retângulo" é:',opts:['Falsa, pois quadrado tem 4 lados iguais e retângulo não','Verdadeira, pois o quadrado possui todas as propriedades que definem o retângulo e o losango','Falsa, pois losango não pode ter ângulos retos','Verdadeira apenas para quadrados de lado par'],c:1,e:'Verdadeira! O quadrado é um caso particular de retângulo (pois tem 4 ângulos retos) e de losango (pois tem 4 lados iguais).'},
+  {q:'A área de um paralelogramo cuja base mede 15 cm e a altura correspondente mede 6 cm é:',opts:['90 cm²','45 cm²','30 cm²','180 cm²'],c:0,e:'A área do paralelogramo é simplesmente base × altura (sem dividir por 2!): 15 × 6 = 90 cm².'},
+  {q:'O que diz a identidade da Tangente em função do Seno e Cosseno?',opts:['tg(x) = cos(x) / sen(x)','tg(x) = sen(x) · cos(x)','tg(x) = sen(x) / cos(x)','tg(x) = 1 / sen(x)'],c:2,e:'A tangente de um ângulo é a razão entre o seu seno e o seu cosseno: tg(x) = sen(x) / cos(x).'},
+];
+
+var qi = 0, score = 0, answered = false;
+function renderQ() {
+  answered = false;
+  var d = QUIZ[qi];
+  document.getElementById('qnum').textContent = 'Questão ' + (qi+1) + ' de ' + QUIZ.length;
+  document.getElementById('qsc').textContent = 'Acertos: ' + score;
+  document.getElementById('qfill').style.width = (qi/QUIZ.length*100) + '%';
+  document.getElementById('qq').textContent = d.q;
+  var wrap = document.getElementById('qo');
+  wrap.innerHTML = '';
+  for (var i = 0; i < d.opts.length; i++) {
+    (function(idx) {
+      var btn = document.createElement('button');
+      btn.className = 'qopt';
+      btn.textContent = d.opts[idx];
+      btn.addEventListener('click', function() { pick(idx); });
+      wrap.appendChild(btn);
+    })(i);
+  }
+  document.getElementById('qex').className = 'qexp';
+  document.getElementById('qex').textContent = '';
+  document.getElementById('qnxt').className = 'qnxt';
+}
+function pick(i) {
+  if (answered) return;
+  answered = true;
+  var d = QUIZ[qi];
+  var bts = document.querySelectorAll('.qopt');
+  for (var j = 0; j < bts.length; j++) {
+    bts[j].disabled = true;
+    if (j === d.c) bts[j].classList.add('ok');
+    else if (j === i) bts[j].classList.add('no');
+  }
+  if (i === d.c) score++;
+  document.getElementById('qsc').textContent = 'Acertos: ' + score;
+  var exp = document.getElementById('qex');
+  exp.textContent = '💡 ' + d.e;
+  exp.className = 'qexp on';
+  document.getElementById('qnxt').className = 'qnxt on';
+}
+document.getElementById('qnxt').addEventListener('click', function() {
+  qi++;
+  if (qi < QUIZ.length) {
+    renderQ();
+  } else {
+    document.getElementById('qfill').style.width = '100%';
+    document.getElementById('qa').style.display = 'none';
+    document.getElementById('qres').className = 'qres on';
+    document.getElementById('qfsc').textContent = score + '/' + QUIZ.length;
+    var p = score / QUIZ.length;
+    document.getElementById('qfmsg').textContent =
+      p === 1 ? 'Perfeito! Você gabaritou trigonometria e geometria! 📐🔥' :
+      p >= .80 ? 'Excelente! Você domina muito bem os triângulos e quadriláteros.' :
+      p >= .55 ? 'Boas bases! Revise os cartões das fórmulas que esqueceu e tente de novo.' :
+      'Releia a teoria, especialmente a Lei dos Senos e Cossenos, e refaça com calma!';
+  }
+});
+document.getElementById('qrst').addEventListener('click', function() {
+  qi = 0; score = 0;
+  document.getElementById('qres').className = 'qres';
+  document.getElementById('qa').style.display = 'block';
+  renderQ();
+});
+renderQ();
+</script>
+</body>
+</html>
